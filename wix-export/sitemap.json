@@ -1,0 +1,18 @@
+{
+  "site": "L7Mrz-Invest",
+  "source": "https://lmpjzs.wixsite.com/l7cryptomining",
+  "mode": "one-page",
+  "sections": [
+    { "id": "topo", "wix": "Header + Hero", "export": "copy-deck.md#hero" },
+    { "id": "cotacoes", "wix": "HTML iframe embed-market.html", "export": "embed-market.html" },
+    { "id": "ativos", "wix": "Repeater 10 cards", "export": "copy-deck.md#watchlist" },
+    { "id": "servicos", "wix": "3 columns", "export": "copy-deck.md#servicos" },
+    { "id": "como-funciona", "wix": "3 steps", "export": "copy-deck.md#metodo" },
+    { "id": "sobre", "wix": "About / founder", "export": "copy-deck.md#sobre" },
+    { "id": "contato", "wix": "Native Wix form", "export": "copy-deck.md#contato" }
+  ],
+  "assets": {
+    "palette": "palette.json",
+    "preview": "../index.html"
+  }
+}

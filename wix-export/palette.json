@@ -1,0 +1,30 @@
+{
+  "name": "L7Mrz-Invest",
+  "mood": "finance / consultoria / navy-gold",
+  "fonts": {
+    "display": "Playfair Display",
+    "body": "Manrope",
+    "wixFallbacks": ["Didot", "Cormorant", "Madefor Display", "Helvetica Neue"]
+  },
+  "colors": {
+    "navy950": "#050810",
+    "navy900": "#08111F",
+    "navy850": "#0B1628",
+    "navy800": "#10203A",
+    "navy700": "#163056",
+    "gold500": "#D4AF37",
+    "gold400": "#E4C76A",
+    "gold300": "#F0DD9A",
+    "text": "#E9EDF5",
+    "muted": "#9AA6BB",
+    "up": "#3DD68C",
+    "down": "#FF6B7A"
+  },
+  "wixThemeHints": {
+    "background": "#050810",
+    "primary": "#D4AF37",
+    "secondary": "#163056",
+    "text": "#E9EDF5",
+    "action": "#D4AF37"
+  }
+}

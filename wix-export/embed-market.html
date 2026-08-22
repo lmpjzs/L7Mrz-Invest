@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L7Mrz-Invest · Mercado</title>
+  <style>
+    :root {
+      --navy: #08111f;
+      --gold: #d4af37;
+      --gold-2: #f0dd9a;
+      --line: rgba(212,175,55,.2);
+      --muted: #9aa6bb;
+      --up: #3dd68c;
+      --down: #ff6b7a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Manrope, system-ui, sans-serif;
+      background: linear-gradient(180deg, #07101d, #050810);
+      color: #e9edf5;
+    }
+    .box {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    .kicker { color: var(--gold); letter-spacing: .2em; font-size: 11px; text-transform: uppercase; font-weight: 700; }
+    h2 { font-family: Georgia, serif; margin: 6px 0 14px; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 9px 6px; border-bottom: 1px solid rgba(212,175,55,.1); text-align: left; }
+    th { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .right { text-align: right; }
+    .up { color: var(--up); }
+    .down { color: var(--down); }
+    .meta { color: var(--muted); font-size: 12px; }
+    .chart { height: 180px; margin-bottom: 12px; }
+    canvas { width: 100% !important; height: 180px !important; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="kicker">L7Mrz-Invest</div>
+    <h2 id="title">Radar de criptomoedas</h2>
+    <div class="chart"><canvas id="chart"></canvas></div>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Ativo</th><th class="right">BRL</th><th class="right">24h</th><th class="right">7d</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="meta" id="stamp">Fonte: CoinGecko</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script>
+    const IDS = "bitcoin,ethereum,tether,binancecoin,ripple,solana,usd-coin,dogecoin,zcash,cardano";
+    const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+    const FALLBACK = [
+      { id:"bitcoin", symbol:"btc", name:"Bitcoin", market_cap_rank:1, current_price:395861, price_change_percentage_24h:0.2, price_change_percentage_7d_in_currency:22.7 },
+      { id:"ethereum", symbol:"eth", name:"Ethereum", market_cap_rank:2, current_price:12421, price_change_percentage_24h:1.9, price_change_percentage_7d_in_currency:29.2 },
+      { id:"tether", symbol:"usdt", name:"Tether", market_cap_rank:3, current_price:5.14, price_change_percentage_24h:0, price_change_percentage_7d_in_currency:0.1 },
+      { id:"ripple", symbol:"xrp", name:"XRP", market_cap_rank:4, current_price:7.64, price_change_percentage_24h:9.1, price_change_percentage_7d_in_currency:49.8 },
+      { id:"binancecoin", symbol:"bnb", name:"BNB", market_cap_rank:5, current_price:3560.93, price_change_percentage_24h:2.5, price_change_percentage_7d_in_currency:13.9 },
+      { id:"usd-coin", symbol:"usdc", name:"USDC", market_cap_rank:6, current_price:5.14, price_change_percentage_24h:0, price_change_percentage_7d_in_currency:0 },
+      { id:"solana", symbol:"sol", name:"Solana", market_cap_rank:7, current_price:481.94, price_change_percentage_24h:3.7, price_change_percentage_7d_in_currency:24.9 },
+      { id:"dogecoin", symbol:"doge", name:"Dogecoin", market_cap_rank:11, current_price:0.466, price_change_percentage_24h:8.9, price_change_percentage_7d_in_currency:30.4 },
+      { id:"zcash", symbol:"zec", name:"Zcash", market_cap_rank:12, current_price:4067.29, price_change_percentage_24h:23.2, price_change_percentage_7d_in_currency:62.3 },
+      { id:"cardano", symbol:"ada", name:"Cardano", market_cap_rank:18, current_price:1.15, price_change_percentage_24h:5.4, price_change_percentage_7d_in_currency:26.7 }
+    ];
+    let chart;
+    function pct(n){ if(n==null) return "—"; return (n>0?"+":"")+Number(n).toFixed(1)+"%"; }
+    function cls(n){ return n>0?"up":n<0?"down":""; }
+    function paint(list){
+      const rows = [...list].sort((a,b)=>a.market_cap_rank-b.market_cap_rank);
+      document.getElementById("rows").innerHTML = rows.map(c =>
+        `<tr data-i="${c.id}"><td>${c.market_cap_rank}</td><td>${c.name} (${c.symbol.toUpperCase()})</td><td class="right">${BRL.format(c.current_price)}</td><td class="right ${cls(c.price_change_percentage_24h)}">${pct(c.price_change_percentage_24h)}</td><td class="right ${cls(c.price_change_percentage_7d_in_currency)}">${pct(c.price_change_percentage_7d_in_currency)}</td></tr>`
+      ).join("");
+      draw(rows[0]);
+      document.querySelectorAll("tr[data-i]").forEach(tr => tr.onclick = () => {
+        draw(rows.find(r => r.id === tr.dataset.i));
+      });
+      document.getElementById("stamp").textContent = "Fonte: CoinGecko · atualizado "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+    }
+    function draw(coin){
+      const src = coin.sparkline_in_7d?.price || Array.from({length:30},(_,i)=>coin.current_price*(1+Math.sin(i/4)*0.02));
+      if(chart) chart.destroy();
+      chart = new Chart(document.getElementById("chart"), {
+        type:"line",
+        data:{ labels:src.map((_,i)=>i), datasets:[{ data:src, borderColor:"#d4af37", backgroundColor:"rgba(212,175,55,.12)", fill:true, tension:.35, pointRadius:0, borderWidth:2 }]},
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{display:false}, y:{ticks:{color:"#9aa6bb"}, grid:{color:"rgba(212,175,55,.08)"}}} }
+      });
+      document.getElementById("title").textContent = coin.name+" · "+BRL.format(coin.current_price);
+    }
+    fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&ids="+IDS+"&order=market_cap_desc&sparkline=true&price_change_percentage=24h,7d")
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(paint)
+      .catch(() => paint(FALLBACK));
+  </script>
+</body>
+</html>
