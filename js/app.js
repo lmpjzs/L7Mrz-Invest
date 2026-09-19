@@ -327,7 +327,7 @@ function bindUi() {
   document.getElementById("contactForm")?.addEventListener("submit", (ev) => {
     ev.preventDefault();
     const note = document.getElementById("formNote");
-    if (note) note.textContent = "Recebido. No Wix, ligue este formulário ao app nativo de contato.";
+    if (note) note.textContent = "Recebido neste navegador. Para falar de verdade, use o WhatsApp ou o e-mail — o formulário ainda não envia mensagem sozinho.";
     ev.target.reset();
   });
 }

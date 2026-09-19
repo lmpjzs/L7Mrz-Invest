@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>L7MRZ Invest — da reserva à primeira carteira</title>
-  <meta name="description" content="Curso de educação financeira em português. Reserva, renda fixa, bolsa e cripto por último. Sem sinal e sem promessa de rentabilidade.">
+  <title>L7MRZ Invest — reserva, carteira e educação financeira</title>
+  <meta name="description" content="Educação financeira e montagem de carteira para quem está começando: reserva de emergência, renda fixa, fundos, ações e FIIs. Cripto em aba separada. Sem sala de sinais.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -17,24 +17,23 @@
   <div class="site">
     <header class="nav">
       <div class="nav-inner">
-        <a class="brand" href="#topo">
+        <a class="brand" href="index.html">
           <span class="mark">L7</span>
           <span>
             <strong>L7MRZ Invest</strong>
             <small>Educação</small>
           </span>
         </a>
-
         <nav id="menu" class="menu" aria-label="Principal">
-          <a class="active" href="#topo">Início</a>
-          <a href="#curso">O curso</a>
-          <a href="#como-funciona">Como funciona</a>
+          <a class="active" href="index.html">Início</a>
+          <a href="#carteira">Carteira</a>
+          <a href="#curso">Como começar</a>
           <a href="#sobre">Sobre</a>
+          <a href="crypto.html">Cripto</a>
           <a href="#contato">Contato</a>
         </nav>
-
         <div style="display:flex;gap:10px;align-items:center">
-          <a class="cta" href="#curso">Quero a trilha</a>
+          <a class="cta" href="#contato">Montar minha carteira</a>
           <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
         </div>
       </div>
@@ -43,48 +42,72 @@
     <main id="topo">
       <section class="wrap hero">
         <div class="reveal">
-          <div class="kicker">Educação financeira · 30 dias</div>
-          <h1>Da reserva à primeira carteira em <em>30 dias</em>.</h1>
+          <div class="kicker">Educação financeira · carteira inicial</div>
+          <h1>Comece pela <em>reserva</em>. Depois a carteira.</h1>
           <p class="lede">
-            Educação financeira para quem está na poupança ou no CDB solto.
-            Ordem certa: caixa → renda fixa → bolsa → cripto. Sem sala de sinais.
+            Consultoria educativa para quem está na poupança ou no CDB solto.
+            Ensinamos a ordem: emergência → renda fixa → fundos → ações e FIIs.
+            Não operamos a sua conta. Sem dica da semana.
           </p>
           <div class="hero-actions">
-            <a class="cta" href="#curso">Quero a trilha</a>
-            <a class="cta ghost" href="#curso">Ver o que entra</a>
+            <a class="cta" href="#carteira">Ver os 5 blocos</a>
+            <a class="cta ghost" href="crypto.html">Cotações de cripto</a>
           </div>
           <div class="stats">
-            <div class="stat"><b>8</b><span>Aulas da trilha</span></div>
-            <div class="stat"><b>30</b><span>Minutos no dia do salário</span></div>
-            <div class="stat"><b>0</b><span>Sinal e gestão da sua conta</span></div>
+            <div class="stat"><b>1º</b><span>Reserva de emergência</span></div>
+            <div class="stat"><b>Baixo risco</b><span>Antes de bolsa e cripto</span></div>
+            <div class="stat"><b>Você opera</b><span>Nós ensinamos o sistema</span></div>
           </div>
         </div>
-
         <aside class="hero-card reveal">
-          <div class="pulse-row">
-            <span class="live"><i></i> Contexto de mercado</span>
-            <span id="updatedAt" class="meta">carregando…</span>
-          </div>
-          <div id="heroMini" class="pulse-row"></div>
-          <div class="chart-box" style="height:230px">
-            <canvas id="priceChart"></canvas>
-          </div>
-          <p class="meta" style="margin:12px 0 0">Radar educacional (CoinGecko, BRL). Não é recomendação de compra.</p>
+          <div class="kicker">Ordem da carteira</div>
+          <h2 style="font-size:28px;margin:10px 0 16px">Do mais seguro ao mais volátil</h2>
+          <ol class="meta" style="padding-left:18px;line-height:1.9">
+            <li>Reserva (Tesouro Selic / CDB diário)</li>
+            <li>Renda fixa (Tesouro, CDB, LCI/LCA)</li>
+            <li>Fundos (gestor profissional)</li>
+            <li>Ações</li>
+            <li>Fundos imobiliários (FIIs)</li>
+          </ol>
+          <p class="meta" style="margin-top:16px">Cripto fica numa aba à parte — só depois da base montada.</p>
         </aside>
       </section>
 
-      <div class="ticker" aria-label="Ticker de preços">
-        <div class="ticker-track" id="tickerTrack"></div>
-      </div>
-
-      <section id="oque">
+      <section id="carteira">
         <div class="wrap">
           <div class="section-head">
             <div>
-              <div class="kicker">O que é</div>
-              <h2>Trilha prática, não mesa de operação.</h2>
-              <p>Mapear gasto, montar reserva, abrir corretora, aportar todo mês. Isto <strong>não</strong> é consultoria de valores mobiliários nem gestão da sua conta.</p>
+              <div class="kicker">Investimentos iniciais</div>
+              <h2>Cinco blocos, linguagem simples</h2>
+              <p>Profissional no método, direto no texto. Cada bloco tem um papel. Não misture tudo no primeiro aporte.</p>
             </div>
+          </div>
+          <div class="services">
+            <article class="panel service reveal">
+              <div class="num">01</div>
+              <h3>Reserva de emergência</h3>
+              <p class="meta"><strong>Tesouro Selic</strong> ou <strong>CDB com liquidez diária</strong>. Serve para imprevisto: emprego, saúde, conserto. Rende pouco, com alta segurança e saque rápido. Sem reserva, o resto da carteira vira aposta.</p>
+            </article>
+            <article class="panel service reveal">
+              <div class="num">02</div>
+              <h3>Renda fixa</h3>
+              <p class="meta"><strong>Tesouro, CDB, LCI/LCA</strong>. Ideal para quem está começando. Previsibilidade, risco baixo e prazos diferentes. Aqui você aprende o que é taxa, vencimento e garantia (FGC, quando existir).</p>
+            </article>
+            <article class="panel service reveal">
+              <div class="num">03</div>
+              <h3>Fundos de investimento</h3>
+              <p class="meta">Você aplica e um <strong>gestor profissional</strong> cuida da carteira. Há fundos de renda fixa, multimercado, ações e imobiliários. Útil quando ainda não quer escolher papel a papel — com taxa e risco à vista.</p>
+            </article>
+            <article class="panel service reveal">
+              <div class="num">04</div>
+              <h3>Ações</h3>
+              <p class="meta">Comprar “pedaços” de empresas na bolsa. Maior potencial de retorno e <strong>maior volatilidade</strong>. Entra depois da reserva e de um pedaço em renda fixa — não no lugar delas.</p>
+            </article>
+            <article class="panel service reveal">
+              <div class="num">05</div>
+              <h3>Fundos imobiliários (FIIs)</h3>
+              <p class="meta">Exposição a imóveis sem comprar um apto. Negociados em bolsa, em geral com <strong>rendimentos periódicos</strong> e liquidez no pregão. Também oscilam. Estude o fundo, não só o “dividendo”.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -93,37 +116,27 @@
         <div class="wrap">
           <div class="section-head">
             <div>
-              <div class="kicker">O curso</div>
-              <h2>O que entra na trilha</h2>
-              <p>Ordem certa. Cripto por último, com teto de risco.</p>
-            </div>
-          </div>
-          <div class="services">
-            <article class="panel service reveal"><div class="num">00</div><h3>Orçamento</h3><p class="meta">Quando <em>não</em> investir.</p></article>
-            <article class="panel service reveal"><div class="num">01</div><h3>Reserva e perfil</h3><p class="meta">Caixa antes de risco.</p></article>
-            <article class="panel service reveal"><div class="num">02</div><h3>Renda fixa</h3><p class="meta">Tesouro, CDB, FGC.</p></article>
-            <article class="panel service reveal"><div class="num">03</div><h3>Renda variável</h3><p class="meta">Ações, FIIs e ETFs.</p></article>
-            <article class="panel service reveal"><div class="num">04</div><h3>Internacional</h3><p class="meta">Dólar e exposição fora.</p></article>
-            <article class="panel service reveal"><div class="num">05</div><h3>Cripto</h3><p class="meta">Com teto de risco.</p></article>
-            <article class="panel service reveal"><div class="num">06</div><h3>Carteira</h3><p class="meta">Aportes todo mês.</p></article>
-            <article class="panel service reveal"><div class="num">07</div><h3>Impostos e golpes</h3><p class="meta">O que a Receita e o golpe pedem.</p></article>
-          </div>
-          <p class="meta" style="margin-top:18px">Extra opcional: como o Bitcoin funciona (técnico).</p>
-        </div>
-      </section>
-
-      <section id="como-funciona">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <div class="kicker">Método</div>
-              <h2>Como funciona</h2>
+              <div class="kicker">Como começamos</div>
+              <h2>Consultoria educativa, criação de carteira</h2>
+              <p>Trilha prática: mapear gasto, fechar a reserva, abrir corretora, aportar todo mês. Isto não é gestão da sua conta nem recomendação automática de produto.</p>
             </div>
           </div>
           <div class="steps">
-            <article class="panel step"><div class="num">I</div><h3>2–3 horas / semana</h3><p class="meta">Ritmo de quem trabalha, não de day trade.</p></article>
-            <article class="panel step"><div class="num">II</div><h3>Apostila + vídeo + planilha</h3><p class="meta">Material para executar, não para colecionar PDF.</p></article>
-            <article class="panel step"><div class="num">III</div><h3>Ritual de 30 minutos</h3><p class="meta">No dia do salário. Aporte vira hábito.</p></article>
+            <article class="panel step">
+              <div class="num">I</div>
+              <h3>Diagnóstico</h3>
+              <p class="meta">Onde está o dinheiro hoje, quanto sobra no mês, o que é emergência de verdade.</p>
+            </article>
+            <article class="panel step">
+              <div class="num">II</div>
+              <h3>Ordem e tetos</h3>
+              <p class="meta">Quanto vai para Selic/CDB, quanto para o restante, o que fica de fora até a base existir.</p>
+            </article>
+            <article class="panel step">
+              <div class="num">III</div>
+              <h3>Ritual de aporte</h3>
+              <p class="meta">2–3 horas por semana no começo; 30 minutos no dia do salário depois. Apostila, vídeo, planilha.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -133,70 +146,10 @@
           <div class="section-head">
             <div>
               <div class="kicker">Limite</div>
-              <h2>O que você não compra</h2>
-              <p>Rentabilidade, dica da semana, “10% ao mês”, gestão da carteira.</p>
+              <h2>O que você não compra aqui</h2>
+              <p>Rentabilidade prometida, “10% ao mês”, sala de sinais, gestão da carteira. Cripto não é o produto desta página — está em <a href="crypto.html">Cripto</a>, com cotações e contexto.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section id="cotacoes">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <div class="kicker">Contexto</div>
-              <h2>Cotações (educacional)</h2>
-              <p>Radar das principais criptos, no fim da trilha — não no começo.</p>
-            </div>
-            <div class="filters">
-              <button class="chip on" data-range="7d" type="button">7 dias</button>
-              <button class="chip" data-range="24h" type="button">24 horas</button>
-            </div>
-          </div>
-          <div class="market-grid">
-            <div class="panel">
-              <div class="pulse-row">
-                <strong id="chartTitle">Bitcoin (BTC)</strong>
-                <span class="meta">BRL</span>
-              </div>
-              <div class="chart-box">
-                <canvas id="priceChartMain" hidden></canvas>
-                <div class="table-wrap">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Ativo</th>
-                        <th>Ticker</th>
-                        <th class="right">Preço</th>
-                        <th class="right">24h</th>
-                        <th class="right">7d</th>
-                        <th class="right">Mkt cap</th>
-                      </tr>
-                    </thead>
-                    <tbody id="marketBody"></tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel shimmer">
-              <div class="kicker">Como ler</div>
-              <h3 class="serif" style="margin:8px 0 10px">Depois da reserva</h3>
-              <p class="meta">Isto é material educacional. Não é recomendação de compra nem gestão da sua conta.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="ativos">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <div class="kicker">Watchlist</div>
-              <h2>Teses no radar (aula de cripto)</h2>
-            </div>
-          </div>
-          <div class="coins" id="coinGrid"></div>
         </div>
       </section>
 
@@ -224,8 +177,8 @@
         <div class="wrap contact">
           <div>
             <div class="kicker">Contato</div>
-            <h2>Pronto para a aula 0?</h2>
-            <p class="lede">Formulário ou WhatsApp. L7MRZ Invest ensina o sistema — não opera a sua conta.</p>
+            <h2>Vamos desenhar a primeira carteira?</h2>
+            <p class="lede">Fale o ponto de partida: só poupança, já tem CDB, já mexeu em bolsa. Respondemos por WhatsApp ou e-mail.</p>
             <div class="panel" style="margin-top:18px">
               <p><b>(11) 94855-3811</b></p>
               <p class="meta">Rua Joaquim Nabuco, 1713<br>São Paulo / SP · CEP 04621-005</p>
@@ -244,16 +197,17 @@
             <div>
               <label for="assunto">Assunto</label>
               <select id="assunto" name="assunto">
-                <option>Quero a trilha</option>
+                <option>Montar carteira inicial</option>
+                <option>Reserva de emergência</option>
                 <option>Dúvida sobre o curso</option>
-                <option>Imprensa e parcerias</option>
+                <option>Cripto (já tenho a base)</option>
               </select>
             </div>
             <div>
               <label for="msg">Mensagem</label>
-              <textarea id="msg" name="mensagem" placeholder="Onde você está hoje: poupança, CDB, já investe…"></textarea>
+              <textarea id="msg" name="mensagem" placeholder="Poupança, CDB, já investe… o que precisa de clareza."></textarea>
             </div>
-            <button class="cta" type="submit">Quero a trilha</button>
+            <button class="cta" type="submit">Quero começar</button>
             <p class="meta" id="formNote"></p>
           </form>
         </div>
@@ -261,12 +215,10 @@
     </main>
 
     <footer class="wrap footer">
-      <div>© 2026 L7MRZ Invest</div>
+      <div>© 2026 L7MRZ Invest · <a href="crypto.html">Cripto</a></div>
       <div>L7MRZ Invest é material educacional. Não é recomendação de investimento, análise de valores mobiliários nem gestão de carteira. Todo investimento envolve risco de perda. Regras de impostos mudam — confira na Receita / CVM na data da sua operação. Exemplos em R$ são ilustrativos.</div>
     </footer>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
