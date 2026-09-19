@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cripto — cotações | L7MRZ Invest</title>
-  <meta name="description" content="Cotações educacionais de criptomoedas em BRL. Aba separada: a carteira inicial da L7MRZ Invest começa em reserva e renda fixa, não em cripto.">
+  <title>Mercado cripto | L7MRZ Invest</title>
+  <meta name="description" content="Cotações em BRL da camada 06 da carteira L7MRZ Invest. Radar, não sala de sinais.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -19,21 +19,18 @@
       <div class="nav-inner">
         <a class="brand" href="index.html">
           <span class="mark">L7</span>
-          <span>
-            <strong>L7MRZ Invest</strong>
-            <small>Educação</small>
-          </span>
+          <span><strong>L7MRZ Invest</strong></span>
         </a>
         <nav id="menu" class="menu" aria-label="Principal">
           <a href="index.html">Início</a>
           <a href="index.html#carteira">Carteira</a>
-          <a href="index.html#curso">Como começar</a>
+          <a href="index.html#metodo">Método</a>
           <a href="index.html#sobre">Sobre</a>
-          <a class="active" href="crypto.html">Cripto</a>
+          <a class="active" href="crypto.html">Mercado</a>
           <a href="index.html#contato">Contato</a>
         </nav>
         <div style="display:flex;gap:10px;align-items:center">
-          <a class="cta ghost" href="index.html#carteira">Voltar à carteira</a>
+          <a class="cta" href="index.html#contato">Agendar conversa</a>
           <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
         </div>
       </div>
@@ -42,26 +39,26 @@
     <main id="topo">
       <section class="wrap hero">
         <div class="reveal">
-          <div class="kicker">Aba cripto · educacional</div>
-          <h1>Cotações. <em>Não</em> o primeiro passo.</h1>
+          <div class="kicker">Camada 06 · cripto</div>
+          <h1>Cotações da <em>última</em> camada.</h1>
           <p class="lede">
-            Radar em BRL (CoinGecko). Serve para estudar o mercado depois da reserva e da renda fixa.
-            Não é sala de sinais nem recomendação de compra.
+            Radar em BRL (CoinGecko). Integra a carteira com teto de risco — depois de reserva e renda fixa.
+            Não é ordem de compra.
           </p>
           <div class="hero-actions">
-            <a class="cta" href="index.html#carteira">Montar a base primeiro</a>
+            <a class="cta ghost" href="index.html#carteira">Ver as seis camadas</a>
           </div>
         </div>
         <aside class="hero-card reveal">
           <div class="pulse-row">
-            <span class="live"><i></i> Mercado ao vivo</span>
+            <span class="live"><i></i> Ao vivo</span>
             <span id="updatedAt" class="meta">carregando…</span>
           </div>
           <div id="heroMini" class="pulse-row"></div>
           <div class="chart-box" style="height:230px">
             <canvas id="priceChart"></canvas>
           </div>
-          <p class="meta" style="margin:12px 0 0">Valores em BRL. Clique numa linha da tabela para trocar o ativo.</p>
+          <p class="meta" style="margin:12px 0 0">BRL. Clique na tabela para trocar o ativo.</p>
         </aside>
       </section>
 
@@ -74,8 +71,8 @@
           <div class="section-head">
             <div>
               <div class="kicker">Radar</div>
-              <h2>Cotações das principais criptomoedas</h2>
-              <p>Tabela, gráfico e teses. Cripto entra na conversa com teto de risco — depois da carteira clássica.</p>
+              <h2>Principais criptomoedas</h2>
+              <p>Preço, variação e teses. A alocação se discute na consultoria; aqui é o painel.</p>
             </div>
             <div class="filters">
               <button class="chip on" data-range="7d" type="button">7 dias</button>
@@ -109,14 +106,13 @@
               </div>
             </div>
             <div class="panel shimmer">
-              <div class="kicker">Como ler</div>
-              <h3 class="serif" style="margin:8px 0 10px">Contexto, não ordem de compra</h3>
+              <div class="kicker">Leitura</div>
+              <h3 class="serif" style="margin:8px 0 10px">Painel, não recomendação</h3>
               <ul class="meta">
-                <li>BTC como referência de liquidez.</li>
-                <li>ETH / SOL / ADA como redes de contrato.</li>
-                <li>USDT / USDC como caixa em cripto — ainda é risco de emissor.</li>
+                <li>BTC — liquidez de referência.</li>
+                <li>ETH / SOL / ADA — redes de contrato.</li>
+                <li>USDT / USDC — caixa em cripto; risco de emissor permanece.</li>
               </ul>
-              <p class="meta">Material educacional. Sem gestão da sua conta.</p>
             </div>
           </div>
         </div>
@@ -137,7 +133,7 @@
 
     <footer class="wrap footer">
       <div>© 2026 L7MRZ Invest · <a href="index.html">Início</a></div>
-      <div>Cotações são educacionais e podem atrasar. Não constituem recomendação de investimento. Todo ativo digital envolve risco de perda total.</div>
+      <div>Cotações podem atrasar. Não constituem recomendação de investimento. Ativos digitais podem ter perda total.</div>
     </footer>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
