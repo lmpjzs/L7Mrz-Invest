@@ -1,6 +1,13 @@
+# Arquivo legado (ago/2026)
+
+**Obsoleto como pipeline.** Produção = GitHub Pages neste repo (`main` → `/`).
+Não remontar no Editor Wix. O Wix `lmpjzs.wixsite.com/l7mrz-invest` é vitrine antiga até o DNS mudar.
+
+---
+
 # Como levar a L7Mrz-Invest para o Wix
 
-A Wix **não importa um site HTML inteiro** como tema. O caminho certo é: usar este projeto como *fonte da verdade* (layout, textos, paleta, widget) e remontar no editor com seções nativas + 1 embed.
+A Wix **não importa um site HTML inteiro** como tema. O caminho antigo era: usar este projeto como *fonte da verdade* (layout, textos, paleta, widget) e remontar no editor com seções nativas + 1 embed.
 
 ## Arquivos
 

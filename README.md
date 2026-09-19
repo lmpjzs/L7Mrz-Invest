@@ -1,28 +1,21 @@
-# L7Mrz-Invest
+# L7MRZ Invest
 
-Site novo a partir da Wix antiga [L7 Crypto Mining](https://lmpjzs.wixsite.com/l7cryptomining).
+Site canónico: **este repo**. GitHub Pages = produção.
 
-Direção: mesa de investimento / consultoria. Paleta navy + dourado. Radar ao vivo no lugar do iframe. Textos reais do founder; lorem e links do Wix fora.
+- Preview / live: https://lmpjzs.github.io/L7Mrz-Invest/
+- Produto: educação financeira (reserva → renda fixa → bolsa → cripto). Não é consultoria nem gestão de conta.
+- Wix (`lmpjzs.wixsite.com/l7mrz-invest`) ficou como vitrine antiga até o DNS apontar para Pages.
 
-## Abrir o preview
+## Deploy
 
-Serviço persistente na LAN (systemd user, linger=yes):
-
-- http://192.168.1.79:18791/
-- http://127.0.0.1:18791/
+Push em `main` atualiza Pages (`/` no branch `main`).
 
 ```bash
-systemctl --user status l7mrz-invest.service
+git -C /DADOS/git/L7Mrz-Invest status
 ```
 
-## Exportar para Wix
-
-Leia `WIX-EXPORT.md`. Resumo: remontar seções no editor + embed de `wix-export/embed-market.html` + textos de `wix-export/copy-deck.md`.
+O Wix Editor **não** recebe este HTML. Não use `WIX-EXPORT.md` como pipeline de publicação.
 
 ## Dados ao vivo
 
-CoinGecko `/coins/markets` em BRL para:
-
-BTC, ETH, USDT, BNB, XRP, SOL, USDC, DOGE, ZEC, ADA.
-
-Se a API falhar, o JS usa o fallback da última coleta (2026-08-22).
+CoinGecko `/coins/markets` em BRL no radar educacional. Se a API falhar, o JS usa fallback estático.
