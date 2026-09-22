@@ -312,10 +312,67 @@ async function loadMarket() {
   if (stamp) stamp.textContent = `Atualizado às ${new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
 }
 
+
+function prefersReduce() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function closeMenu() {
+  const menu = document.getElementById("menu");
+  const burger = document.getElementById("burger");
+  const scrim = document.getElementById("navScrim");
+  menu?.classList.remove("open");
+  burger?.setAttribute("aria-expanded", "false");
+  if (burger) burger.setAttribute("aria-label", "Abrir menu");
+  document.body.classList.remove("nav-open");
+  if (scrim) scrim.hidden = true;
+  document.querySelector(".has-sub")?.classList.remove("open");
+  document.getElementById("carteiraTrigger")?.setAttribute("aria-expanded", "false");
+}
+
+function openMenu() {
+  const menu = document.getElementById("menu");
+  const burger = document.getElementById("burger");
+  const scrim = document.getElementById("navScrim");
+  menu?.classList.add("open");
+  burger?.setAttribute("aria-expanded", "true");
+  if (burger) burger.setAttribute("aria-label", "Fechar menu");
+  document.body.classList.add("nav-open");
+  if (scrim) scrim.hidden = false;
+}
+
 function bindUi() {
   const burger = document.getElementById("burger");
   const menu = document.getElementById("menu");
-  burger?.addEventListener("click", () => menu.classList.toggle("open"));
+  const scrim = document.getElementById("navScrim");
+  const nav = document.getElementById("siteNav");
+  const subWrap = document.querySelector(".has-sub");
+  const trigger = document.getElementById("carteiraTrigger");
+
+  burger?.addEventListener("click", () => {
+    if (menu?.classList.contains("open")) closeMenu();
+    else openMenu();
+  });
+  scrim?.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key === "Escape") closeMenu();
+  });
+  menu?.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", (ev) => {
+      if (window.matchMedia("(max-width: 960px)").matches && a.id === "carteiraTrigger") {
+        return;
+      }
+      closeMenu();
+    });
+  });
+  trigger?.addEventListener("click", (ev) => {
+    if (window.matchMedia("(max-width: 960px)").matches) {
+      ev.preventDefault();
+      const open = subWrap.classList.toggle("open");
+      trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+  });
+
   document.querySelectorAll("[data-range]").forEach((btn) => {
     btn.addEventListener("click", () => {
       document.querySelectorAll("[data-range]").forEach((b) => b.classList.remove("on"));
@@ -330,11 +387,82 @@ function bindUi() {
     if (note) note.textContent = "Recebido neste navegador. Para falar de verdade, use o WhatsApp ou o e-mail — o formulário ainda não envia mensagem sozinho.";
     ev.target.reset();
   });
+
+  document.querySelectorAll(".layer-hit").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".layer-hit").forEach((b) => b.classList.remove("on"));
+      btn.classList.add("on");
+      const el = document.getElementById(btn.dataset.target);
+      el?.scrollIntoView({ behavior: prefersReduce() ? "auto" : "smooth", block: "center" });
+      document.querySelectorAll("[data-layer]").forEach((c) => c.classList.remove("on"));
+      el?.classList.add("on");
+    });
+  });
+
+  const onScroll = () => {
+    if (nav) nav.classList.toggle("compact", window.scrollY > 24);
+    markNav();
+    fillRail();
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  revealOnView();
+}
+
+function markNav() {
+  if (!document.getElementById("carteira")) return;
+  const ids = ["inicio", "carteira", "metodo", "sobre", "contato"];
+  let current = "inicio";
+  const y = window.scrollY + 90;
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= y) current = id;
+  }
+  document.querySelectorAll(".menu [data-nav]").forEach((a) => {
+    a.classList.toggle("active", a.dataset.nav === current);
+  });
+}
+
+function fillRail() {
+  const fill = document.getElementById("layerFill");
+  const layers = [...document.querySelectorAll("[data-layer]")];
+  if (!fill || !layers.length) return;
+  const mid = window.innerHeight * 0.45;
+  let idx = 0;
+  layers.forEach((el, i) => {
+    if (el.getBoundingClientRect().top < mid) idx = i;
+  });
+  fill.style.width = `${((idx + 1) / layers.length) * 100}%`;
+  layers.forEach((el, i) => el.classList.toggle("on", i === idx));
+  document.querySelectorAll(".layer-hit").forEach((btn, i) => btn.classList.toggle("on", i === idx));
+}
+
+function revealOnView() {
+  const nodes = document.querySelectorAll(".reveal");
+  if (prefersReduce()) {
+    nodes.forEach((n) => n.classList.add("in"));
+    return;
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+  );
+  nodes.forEach((n, i) => {
+    n.style.transitionDelay = `${Math.min(i % 6, 5) * 0.06}s`;
+    io.observe(n);
+  });
 }
 
 function neuralNet() {
   const canvas = document.getElementById("neural");
-  if (!canvas) return;
+  if (!canvas || prefersReduce()) return;
   const ctx = canvas.getContext("2d");
   const dots = [];
   const resize = () => {
@@ -343,12 +471,13 @@ function neuralNet() {
   };
   resize();
   window.addEventListener("resize", resize);
-  for (let i = 0; i < 46; i += 1) {
+  const n = Math.min(22, Math.floor(window.innerWidth / 70));
+  for (let i = 0; i < n; i += 1) {
     dots.push({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
     });
   }
   function tick() {
@@ -358,9 +487,9 @@ function neuralNet() {
       d.y += d.vy;
       if (d.x < 0 || d.x > canvas.width) d.vx *= -1;
       if (d.y < 0 || d.y > canvas.height) d.vy *= -1;
-      ctx.fillStyle = "rgba(212,175,55,0.55)";
+      ctx.fillStyle = "rgba(212,175,55,0.35)";
       ctx.beginPath();
-      ctx.arc(d.x, d.y, 1.4, 0, Math.PI * 2);
+      ctx.arc(d.x, d.y, 1.1, 0, Math.PI * 2);
       ctx.fill();
     }
     for (let i = 0; i < dots.length; i += 1) {
@@ -368,8 +497,8 @@ function neuralNet() {
         const a = dots[i];
         const b = dots[j];
         const dist = Math.hypot(a.x - b.x, a.y - b.y);
-        if (dist < 160) {
-          ctx.strokeStyle = `rgba(212,175,55,${(1 - dist / 160) * 0.16})`;
+        if (dist < 140) {
+          ctx.strokeStyle = `rgba(212,175,55,${(1 - dist / 140) * 0.1})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);

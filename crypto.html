@@ -13,25 +13,39 @@
 <body>
   <div class="bg-grid"></div>
   <canvas id="neural" aria-hidden="true"></canvas>
+  <div class="nav-scrim" id="navScrim" hidden></div>
 
   <div class="site">
-    <header class="nav">
+    <header class="nav" id="siteNav">
       <div class="nav-inner">
         <a class="brand" href="index.html">
           <span class="mark">L7</span>
           <span><strong>L7MRZ Invest</strong></span>
         </a>
         <nav id="menu" class="menu" aria-label="Principal">
-          <a href="index.html">Início</a>
-          <a href="index.html#carteira">Carteira</a>
-          <a href="index.html#metodo">Método</a>
-          <a href="index.html#sobre">Sobre</a>
-          <a class="active" href="crypto.html">Mercado</a>
-          <a href="index.html#contato">Contato</a>
+          <a data-nav="inicio" href="index.html">Início</a>
+          <div class="has-sub">
+            <a data-nav="carteira" href="index.html#carteira" id="carteiraTrigger" aria-haspopup="true" aria-expanded="false">Carteira</a>
+            <div class="sub" role="menu" aria-label="Camadas da carteira">
+              <a href="index.html#layer-01" role="menuitem"><b>01</b> Reserva</a>
+              <a href="index.html#layer-02" role="menuitem"><b>02</b> Renda fixa</a>
+              <a href="index.html#layer-03" role="menuitem"><b>03</b> Fundos</a>
+              <a href="index.html#layer-04" role="menuitem"><b>04</b> Ações</a>
+              <a href="index.html#layer-05" role="menuitem"><b>05</b> FIIs</a>
+              <a href="index.html#layer-06" role="menuitem"><b>06</b> Criptomoedas</a>
+              <a class="sub-foot" href="crypto.html" role="menuitem">Mercado → cotações</a>
+            </div>
+          </div>
+          <a data-nav="metodo" href="index.html#metodo">Método</a>
+          <a data-nav="sobre" href="index.html#sobre">Sobre</a>
+          <a data-nav="mercado" class="active" href="crypto.html">Mercado</a>
+          <a data-nav="contato" href="index.html#contato">Contato</a>
         </nav>
-        <div style="display:flex;gap:10px;align-items:center">
+        <div class="nav-end">
           <a class="cta" href="index.html#contato">Agendar conversa</a>
-          <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
+          <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+            <span></span><span></span>
+          </button>
         </div>
       </div>
     </header>
@@ -80,7 +94,7 @@
             </div>
           </div>
           <div class="market-grid">
-            <div class="panel">
+            <div class="panel reveal">
               <div class="pulse-row">
                 <strong id="chartTitle">Bitcoin (BTC)</strong>
                 <span class="meta">BRL</span>
@@ -105,7 +119,7 @@
                 </div>
               </div>
             </div>
-            <div class="panel shimmer">
+            <div class="panel reveal">
               <div class="kicker">Leitura</div>
               <h3 class="serif" style="margin:8px 0 10px">Painel, não recomendação</h3>
               <ul class="meta">
