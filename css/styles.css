@@ -423,18 +423,21 @@ h1 em {
 }
 .ticker-track {
   display: flex;
-  gap: 28px;
+  flex-wrap: nowrap;
   width: max-content;
-  animation: marquee 38s linear infinite;
-  padding: 12px 0;
+  will-change: transform;
 }
-.ticker:hover .ticker-track { animation-play-state: paused; }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.ticker-set {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 28px;
+  padding: 12px 28px 12px 0;
+  flex: 0 0 auto;
 }
 .tick {
-  display: flex;
+  display: inline-flex;
+  flex: 0 0 auto;
   gap: 10px;
   align-items: center;
   font-size: 13px;
@@ -722,6 +725,6 @@ tr[data-id].on td { background: rgba(212, 175, 55, 0.12); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
-  .ticker-track, .live i, .cta::after { animation: none !important; }
+  .live i, .cta::after { animation: none !important; }
   #neural { display: none; }
 }

@@ -134,6 +134,8 @@ function mergeMarket(list) {
   state.market = next;
 }
 
+const tickerState = { x: 0, paused: false, half: 0, raf: 0, bound: false };
+
 function renderTicker() {
   const track = document.getElementById("tickerTrack");
   if (!track) return;
@@ -141,7 +143,29 @@ function renderTicker() {
     const row = state.market[coin.id];
     return `<span class="tick"><b class="sym">${row.symbol}</b> ${BRL.format(row.price)} <b class="${cls(row.ch24)}">${pct(row.ch24)}</b></span>`;
   }).join("");
-  track.innerHTML = bits + bits;
+  track.innerHTML = `<span class="ticker-set">${bits}</span><span class="ticker-set" aria-hidden="true">${bits}</span>`;
+  const parent = track.closest(".ticker");
+  if (parent && !tickerState.bound) {
+    tickerState.bound = true;
+    parent.addEventListener("mouseenter", () => { tickerState.paused = true; });
+    parent.addEventListener("mouseleave", () => { tickerState.paused = false; });
+  }
+  const start = () => {
+    const set = track.querySelector(".ticker-set");
+    tickerState.half = set ? set.getBoundingClientRect().width : 0;
+    tickerState.x = 0;
+    if (tickerState.raf) cancelAnimationFrame(tickerState.raf);
+    const step = () => {
+      if (!tickerState.paused && tickerState.half > 0) {
+        tickerState.x -= 0.55;
+        if (-tickerState.x >= tickerState.half) tickerState.x += tickerState.half;
+        track.style.transform = `translate3d(${tickerState.x}px,0,0)`;
+      }
+      tickerState.raf = requestAnimationFrame(step);
+    };
+    tickerState.raf = requestAnimationFrame(step);
+  };
+  requestAnimationFrame(start);
 }
 
 function renderTable() {
