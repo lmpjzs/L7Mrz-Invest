@@ -169,8 +169,10 @@ function renderTable() {
     .join("");
 
   body.querySelectorAll("tr").forEach((tr) => {
+    tr.classList.toggle("on", tr.dataset.id === state.active);
     tr.addEventListener("click", () => {
       state.active = tr.dataset.id;
+      body.querySelectorAll("tr").forEach((row) => row.classList.toggle("on", row.dataset.id === state.active));
       updateHeroMini();
       drawChart();
     });

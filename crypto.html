@@ -51,7 +51,7 @@
     </header>
 
     <main id="topo">
-      <section class="wrap hero">
+      <section class="wrap hero solo">
         <div class="reveal">
           <div class="kicker">Camada 06 · cripto</div>
           <h1>Cotações da <em>última</em> camada.</h1>
@@ -63,17 +63,6 @@
             <a class="cta ghost" href="index.html#carteira">Ver as seis camadas</a>
           </div>
         </div>
-        <aside class="hero-card reveal">
-          <div class="pulse-row">
-            <span class="live"><i></i> Ao vivo</span>
-            <span id="updatedAt" class="meta">carregando…</span>
-          </div>
-          <div id="heroMini" class="pulse-row"></div>
-          <div class="chart-box" style="height:230px">
-            <canvas id="priceChart"></canvas>
-          </div>
-          <p class="meta" style="margin:12px 0 0">BRL. Clique na tabela para trocar o ativo.</p>
-        </aside>
       </section>
 
       <div class="ticker" aria-label="Ticker de preços">
@@ -93,41 +82,49 @@
               <button class="chip" data-range="24h" type="button">24 horas</button>
             </div>
           </div>
-          <div class="market-grid">
-            <div class="panel reveal">
+          <div class="market-grid linked">
+            <aside class="panel live-panel reveal">
+              <div class="pulse-row">
+                <span class="live"><i></i> Ao vivo</span>
+                <span id="updatedAt" class="meta">carregando…</span>
+              </div>
               <div class="pulse-row">
                 <strong id="chartTitle">Bitcoin (BTC)</strong>
                 <span class="meta">BRL</span>
               </div>
-              <div class="chart-box">
-                <canvas id="priceChartMain" hidden></canvas>
-                <div class="table-wrap">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Ativo</th>
-                        <th>Ticker</th>
-                        <th class="right">Preço</th>
-                        <th class="right">24h</th>
-                        <th class="right">7d</th>
-                        <th class="right">Mkt cap</th>
-                      </tr>
-                    </thead>
-                    <tbody id="marketBody"></tbody>
-                  </table>
-                </div>
+              <div id="heroMini" class="pulse-row"></div>
+              <div class="chart-box live-chart">
+                <canvas id="priceChart"></canvas>
+              </div>
+              <p class="meta" style="margin:12px 0 0">Clique na tabela ao lado para trocar o ativo.</p>
+            </aside>
+            <div class="panel table-panel reveal">
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Ativo</th>
+                      <th>Ticker</th>
+                      <th class="right">Preço</th>
+                      <th class="right">24h</th>
+                      <th class="right">7d</th>
+                      <th class="right">Mkt cap</th>
+                    </tr>
+                  </thead>
+                  <tbody id="marketBody"></tbody>
+                </table>
               </div>
             </div>
-            <div class="panel reveal">
-              <div class="kicker">Leitura</div>
-              <h3 class="serif" style="margin:8px 0 10px">Painel, não recomendação</h3>
-              <ul class="meta">
-                <li>BTC — liquidez de referência.</li>
-                <li>ETH / SOL / ADA — redes de contrato.</li>
-                <li>USDT / USDC — caixa em cripto; risco de emissor permanece.</li>
-              </ul>
-            </div>
+          </div>
+          <div class="panel reveal" style="margin-top:18px">
+            <div class="kicker">Leitura</div>
+            <h3 class="serif" style="margin:8px 0 10px">Painel, não recomendação</h3>
+            <ul class="meta">
+              <li>BTC — liquidez de referência.</li>
+              <li>ETH / SOL / ADA — redes de contrato.</li>
+              <li>USDT / USDC — caixa em cripto; risco de emissor permanece.</li>
+            </ul>
           </div>
         </div>
       </section>

@@ -658,6 +658,24 @@ textarea { min-height: 130px; resize: vertical; }
   transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
+
+.hero.solo { grid-template-columns: 1fr; padding-bottom: 20px; }
+.hero.solo .lede { max-width: 62ch; }
+.market-grid.linked {
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+  align-items: stretch;
+}
+.live-panel, .table-panel { display: flex; flex-direction: column; min-height: 0; }
+.live-chart { min-height: 280px; height: 320px; flex: 1; }
+.table-wrap { overflow: auto; max-height: 520px; }
+tr[data-id] { cursor: pointer; }
+tr[data-id]:hover td { background: rgba(212, 175, 55, 0.06); }
+tr[data-id].on td { background: rgba(212, 175, 55, 0.12); }
+@media (max-width: 960px) {
+  .market-grid.linked { grid-template-columns: 1fr; }
+  .live-chart { height: 240px; min-height: 220px; }
+}
+
 @media (max-width: 960px) {
   .hero, .market-grid, .about, .contact, .coins, .steps, .services {
     grid-template-columns: 1fr;
