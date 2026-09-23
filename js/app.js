@@ -414,7 +414,8 @@ function bindUi() {
     ev.target.reset();
   });
 
-  document.querySelectorAll(".layer-hit").forEach((btn) => {
+  document.querySelectorAll(".layer-hit").forEach((btn, i) => {
+    btn.style.setProperty("--z", String(8 + i * 10));
     btn.addEventListener("click", () => {
       document.querySelectorAll(".layer-hit").forEach((b) => b.classList.remove("on"));
       btn.classList.add("on");
@@ -424,6 +425,19 @@ function bindUi() {
       el?.classList.add("on");
     });
   });
+  const stage = document.getElementById("stack3d");
+  const stack = document.getElementById("layerStack");
+  if (stage && stack && !prefersReduce()) {
+    stage.addEventListener("pointermove", (ev) => {
+      const r = stage.getBoundingClientRect();
+      const x = (ev.clientX - r.left) / r.width - 0.5;
+      const y = (ev.clientY - r.top) / r.height - 0.5;
+      stack.style.transform = `rotateX(${16 - y * 10}deg) rotateY(${-12 + x * 16}deg)`;
+    });
+    stage.addEventListener("pointerleave", () => {
+      stack.style.transform = "rotateX(16deg) rotateY(-12deg)";
+    });
+  }
 
   const onScroll = () => {
     if (nav) nav.classList.toggle("compact", window.scrollY > 24);
